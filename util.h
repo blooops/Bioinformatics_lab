@@ -14,6 +14,7 @@ typedef struct atom {
     int residue_number;
     char chain_id;
     float x, y, z;
+    float B;
 } Atom;
 
 int get_number_of_atoms(char* filename);

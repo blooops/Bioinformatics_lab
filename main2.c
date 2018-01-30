@@ -5,7 +5,7 @@
 void print_interaction(Atom p, Atom r) {
     float distance = SQ(p.x-r.x) + SQ(p.y-r.y) + SQ(p.z-r.z); 
     if(distance < 16.0)
-        printf("%4s %6d %4s %6d - %4s %6d %4s %6d %8.3f\n", p.atom_type, p.slno, p.residue_type, p.residue_number, r.atom_type, r.slno, r.residue_type, r.residue_number, sqrt(distance));
+        printf("%4s%6d%4s%6d - %4s%6d%4s%6d %8.3f\n", p.atom_type, p.slno, p.residue_type, p.residue_number, r.atom_type, r.slno, r.residue_type, r.residue_number, sqrt(distance));
 }
 
 

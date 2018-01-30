@@ -1,4 +1,10 @@
 
+main3: main3.o util.o
+	gcc -o main main3.o util.o -lm
+
+main3.o: main3.c 
+	gcc -c -o main3.o main3.c
+
 main2: main2.o util.o
 	gcc -o main main2.o util.o -lm
 

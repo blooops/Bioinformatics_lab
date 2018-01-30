@@ -51,6 +51,13 @@ Atom* read_pdb(char* pdbfilename, int number_atoms)  {
             buffer[i] = '\0';
             atoms[number_of_atoms].z = atof(buffer); 
 
+            for(i = 0; i<7; i++) buffer[i] = line[60+i];
+            buffer[i] = '\0';
+            atoms[number_of_atoms].B = atof(buffer);
+
+            
+
+
             xcm += atoms[number_of_atoms].x; ycm += atoms[number_of_atoms].y; zcm += atoms[number_of_atoms].z;
             
             number_of_atoms++;
