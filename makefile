@@ -1,7 +1,6 @@
-all:  main1
 
 main2: main2.o util.o
-	gcc -o main main2.o util.o
+	gcc -o main main2.o util.o -lm
 
 main2.o: main2.c
 	gcc -c -o main2.o main2.c
