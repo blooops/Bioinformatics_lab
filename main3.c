@@ -109,6 +109,7 @@ int main() {
 
     f2 values;
     
+    printf("AVERAGE B FACTOR:\n");
     values = get_average_b(atoms, a, b-1);
     printf("CHAIN A: MAIN=%8.3f SIDE=%8.3f \n", values.a, values.b);
     values = get_average_b(atoms, b, c-1);
@@ -118,6 +119,7 @@ int main() {
     values = get_average_b(atoms, d, N-1);
     printf("CHAIN D: MAIN=%8.3f SIDE=%8.3f \n", values.a, values.b);
 
+    printf("MOST FLUCTUATING AND LEAST FLUCTUATING RESIDUES:\n");
     printf("CHAIN A => \n");
     print_residue_bfactor(atoms, a, b-1);
     
