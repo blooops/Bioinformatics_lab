@@ -6,7 +6,7 @@ typedef struct matrix {
   int value;
 } Matrix;
 
-void needleman_wunsh(char* seq1, char* seq2, int seq_len1, int seq_len2,
+void smith_waterman(char* seq1, char* seq2, int seq_len1, int seq_len2,
                      int gap_penalty, int match_score, int mismatch_score) {
 
    int i,j;
@@ -82,35 +82,31 @@ void needleman_wunsh(char* seq1, char* seq2, int seq_len1, int seq_len2,
     // Print the global alignment result:
     i = seq_len1 ; j = seq_len2 ;
     printf("\n\n");
-    while(!(i < 1 || j < 1)){
+    score[0][0].pointer = 69;
+    while(score[i][j].pointer != 69){
         if(score[i][j].pointer == 0) {
-            aligned1[length] = seq1[i-1];
-            aligned2[length] = seq2[j-1];
+            // aligned1[length] = seq1[i];
+            // aligned2[length] = seq2[j];
             printf("%c ----- %c", seq1[i-1], seq2[j-1]);
             if(seq1[i-1] == seq2[j-1]) printf("*\n");
             else printf("\n");
             length++; i--; j--;
         }
         else if(score[i][j].pointer == 1) {
-            aligned1[length] = seq1[i-1];
-            aligned2[length] = '-';
+            // aligned1[length] = seq1[i];
+            // aligned2[length] = '-';
             printf("%c ----- %c\n", seq1[i-1], '|');
             length++; i--;
         }
         else {
-            aligned1[length] = '-';
-            aligned2[length] = seq2[j-1];
+            // aligned1[length] = '-';
+            // aligned2[length] = seq2[j];
             printf("%c ----- %c\n", '|', seq2[j-1]);
             length++; j--;
         }
     }
 
-    printf("\n\n\n");
-    aligned1[length] = aligned2[length] = '\0';
-    printf("Final alignment:\n%s\n%s\n", aligned1, aligned2);
-
-
-}
+  }
 
 int main() {
 
