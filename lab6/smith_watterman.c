@@ -53,6 +53,10 @@ void smith_waterman(char* seq1, char* seq2, int seq_len1, int seq_len2,
                   score[i][j].value = score[i][j-1].value + gap_penalty;
                   score[i][j].pointer = -1;
               }
+              if(score[i][j].value < 0) {
+                score[i][j].value = 0;
+                score[i][j].pointer = 9;
+              }
 
           }
       }
@@ -79,11 +83,23 @@ void smith_waterman(char* seq1, char* seq2, int seq_len1, int seq_len2,
 
     char aligned1[1000], aligned2[1000];
     int length = 0;
-    // Print the global alignment result:
-    i = seq_len1 ; j = seq_len2 ;
+    // Print the local alignment result:
+    int max = 0; int maxi, maxj;
+    maxi = maxj = -1;
+    for(i=0; i < seq_len1+1; i++) {
+      for(j=0; j < seq_len2+1; j++) {
+        if(max < score[i][j].value) {
+          max = score[i][j].value;
+          maxi = i;
+          maxj = j;
+        }
+      }
+    }
     printf("\n\n");
-    score[0][0].pointer = 69;
-    while(score[i][j].pointer != 69){
+    score[0][0].pointer = 9;
+    i = maxi;
+    j=maxj;
+    while(score[i][j].pointer != 9){
         if(score[i][j].pointer == 0) {
             // aligned1[length] = seq1[i];
             // aligned2[length] = seq2[j];
@@ -98,7 +114,7 @@ void smith_waterman(char* seq1, char* seq2, int seq_len1, int seq_len2,
             printf("%c ----- %c\n", seq1[i-1], '|');
             length++; i--;
         }
-        else {
+        else if(score[i][j].pointer == -1){
             // aligned1[length] = '-';
             // aligned2[length] = seq2[j];
             printf("%c ----- %c\n", '|', seq2[j-1]);
@@ -142,5 +158,5 @@ int main() {
     printf("Input the mismatch score :\n");
     scanf("%d", &mismatch_score);
 
-    needleman_wunsh(seq1, seq2, seq_len1, seq_len2, gap_penalty, match_score, mismatch_score);
+    smith_waterman(seq1, seq2, seq_len1, seq_len2, gap_penalty, match_score, mismatch_score);
 }
